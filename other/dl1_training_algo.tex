@@ -1,0 +1,49 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+
+\newtheoremstyle{plain2}
+{3pt}% Space above
+{3pt}% Space below
+{}% Body font
+{}% Indent amount
+{\bfseries}% Theorem head font
+{\\*[3pt]}% Punctuation after theorem head % HERE CHANGE THE SPACING
+{.5em}% Space after theorem head
+{}% Theorem head spec (can be left empty, meaning `normal')
+\theoremstyle{plain2}
+\newtheorem*{utheorem}{Theorem}
+
+% \title{MajorityElement}
+% \author{demkejon001 }
+% \date{September 2020}
+
+\begin{document}
+
+\section*{Deep Learning Training Pseudocode}
+
+\begin{algorithm}[H]
+\caption{Deep Learning Training Loop}
+\begin{algorithmic}
+\Procedure{train}{network $f_{\theta}$, data $x$, targets $y$, and training steps $n$}
+    \State losses $= [ \; ]$
+    \State Put $f_{\theta}$, $x$, and $y$ on device (`cuda' or `cpu')
+    \For{$i = 1, \cdots, n$}
+        \State $\hat{y} = f_{\theta}(x)$ 
+        \State $L = \frac{1}{\lvert y \rvert} \sum_{k=0}^{\lvert y \rvert - 1} (\hat{y}_k - y_k)^2$ \Comment{compute (MSE) loss}
+        \State losses.append($L$)
+        \State Compute gradients $\nabla_{\theta}$ \Comment{call L.backward()}
+        \State $\theta = \theta - \alpha \nabla_{\theta}$ \Comment{call SGD.step()}
+        \State $\nabla_{\theta} = 0$ \Comment{zero out gradients with SGD.zero\_grad()}
+    \EndFor
+    \State \Return losses
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+\end{document}
